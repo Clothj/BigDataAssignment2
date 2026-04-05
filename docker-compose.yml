@@ -18,6 +18,12 @@ services:
     hostname: cluster-master
     tty: true
     working_dir: /app
+    environment:
+      - N_DOCS=${N_DOCS:-100}
+      - RUN_SAMPLE_QUERY=${RUN_SAMPLE_QUERY:-0}
+      - SAMPLE_QUERY=${SAMPLE_QUERY:-this is a query}
+      - CASSANDRA_HOST=${CASSANDRA_HOST:-cassandra-server}
+      - INDEX_KEYSPACE=${INDEX_KEYSPACE:-search_engine}
     # You can comment the entrypoint to run the script manually inside the container
     entrypoint: 
       - bash
@@ -42,8 +48,6 @@ services:
   cassandra-server:
     image: cassandra
     container_name: cassandra-server
-    ports:
-      - "7000:7000"
     networks:
       - spark-cluster
     
