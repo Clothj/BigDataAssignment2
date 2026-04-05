@@ -162,8 +162,8 @@ def main() -> None:
             print("No documents matched the query terms.")
             return
 
-        for idx, ((doc_id, title), score) in enumerate(top10, start=1):
-            print(f"{idx}\t{doc_id}\t{title}\t{score:.6f}")
+        for (doc_id, title), _score in top10:
+            print(f"{doc_id}\t{title}")
     finally:
         if cluster is not None:
             cluster.shutdown()
